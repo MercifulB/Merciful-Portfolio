@@ -1,3 +1,14 @@
+import './style.css'
+
+import * as THREE from 'three';
+
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+
+import { AmbientLight, Int8BufferAttribute, SphereGeometry } from 'three';
+
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+
+
 const scene = new THREE.Scene();
 
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
@@ -41,10 +52,12 @@ scene.add(lightHelper, gridHelper)
 
 const controls = new OrbitControls(camera, renderer.domElement);
 
+const geo = new THREE.SphereGeometry(0.25, 24, 24);
+const mat = new THREE.MeshStandardMaterial( { color: 0xffffff } )
 
 function addStar() {
-  const geometry = new THREE.SphereGeometry(0.25, 24, 24);
-  const material = new THREE.MeshStandardMaterial( { color: 0xffffff } )
+  const geometry = geo
+  const material = mat
   const star = new THREE.Mesh( geometry, material );
 
   const [x, y, z] = Array(3).fill().map(() => THREE.MathUtils.randFloatSpread( 100 ) );
